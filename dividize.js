@@ -118,7 +118,7 @@
                         .addClass('dvdz-cell')
                         .addClass('dvdz-cell-' + index)
                         //mark the original table header cells
-                        .addClass(($(this).is(settings.customHeaderTarget) ? 'data-exth data-exth-' + index : ''));
+                        .addClass(($(this).is(settings.customHeaderTarget) ? 'data-exth' : ''));
 
                     if (index === 0) { //mark first and last cell
                         $cell.addClass('first-cell');
@@ -127,9 +127,8 @@
                     }
 
                     if (settings.preserveDim) { //preserve cell dimensions
+                        $cell.addClass('dvdz-dim-cell');
                         $cell.css({
-                            'display'           : 'inline-block',
-                            'vertical-align'    : 'top',
                             'line-height'       : $(el).outerHeight() + 'px',
                             'height'            : $(el).outerHeight() + 'px',
                             'width'             : $(el).outerWidth() + 'px',
@@ -145,7 +144,7 @@
                             .html(th[index]);
 
                         if (settings.hideLabels) {
-                            $label.css('display', 'none');
+                            $label.addClass('dvdz-hidden')
                         }
 
                         $cell.append($label); //add label to our cell
@@ -158,12 +157,9 @@
                         .html($(this).html()); //copy cell content into our data wrapper
 
                     if (settings.preserveDim) { //preserve dimensions of content
-                        $labelData.css({
-                            'display'           : 'inline-block',
-                            'vertical-align'    : 'middle',
-                            'line-height'       : 'normal',
-                        });
+                        $labelData.addClass('dvdz-dim-data')
                     }
+                    
                     $cell.append($labelData); //add content to our cell
                     $cell.appendTo($row); //add cell to our row
                 }); //end each(function (index, el)
