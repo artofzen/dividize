@@ -144,7 +144,7 @@
                             .html(th[index]);
 
                         if (settings.hideLabels) {
-                            $label.addClass('dvdz-hidden')
+                            $label.addClass('dvdz-hidden');
                         }
 
                         $cell.append($label); //add label to our cell
@@ -157,7 +157,7 @@
                         .html($(this).html()); //copy cell content into our data wrapper
 
                     if (settings.preserveDim) { //preserve dimensions of content
-                        $labelData.addClass('dvdz-dim-data')
+                        $labelData.addClass('dvdz-dim-data');
                     }
                     
                     $cell.append($labelData); //add content to our cell
