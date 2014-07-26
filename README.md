@@ -15,3 +15,5 @@ Convert an HTML table to a responsive DIV structure
 <li><b>enableAltRows</b> (default : false) - Mark our rows with classes even/odd for css selectors</li>
 </ul>
 </p>
+
+More information, including a demo can be found on my <a href="http://www.the-source-box.com/dividize-converting-table-responsive-div-structure/" rel="nofollow" target="blank">blog</a>.
