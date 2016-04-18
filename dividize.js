@@ -1,6 +1,25 @@
 (function ($) {
     "use strict";
 
+    $.fn.sortByDepth = function() {
+        var ar = this.map(function() {
+            return {length: $(this).parents().length, elt: this}
+        }).get(),
+        result = [],
+        i = ar.length;
+
+
+        ar.sort(function(a, b) {
+            return a.length - b.length;
+        });
+
+        while (i--) {
+            result.push(ar[i].elt);
+        }
+        return $(result);
+    };
+
+
     $.fn.dividize = function (options) {
 
         var settings = $.extend({
@@ -78,7 +97,7 @@
 
         var globalIndex = 0; //global index to make each element unique
 
-        this.replaceWith(function () {
+        this.sortByDepth().replaceWith(function () {
             var $self = $(this);
 
             var $th = $self.find(settings.customHeaderTarget); //get header target
@@ -92,14 +111,16 @@
 
             var $table = $('<div>').addClass('dvdz-box').addClass(settings.classes); //our table replacement
 
-            var rowCount = $self.find('tr').length; //add/first last row tags
-            $('tr', $self).each(function (i) { //iterate table rows
+            var trs = $self.children('tr');
+            trs = trs.add($self.children('tbody, thead').children('tr'));
+            var rowCount = trs.length; //add/first last row tags
+            trs.each(function (i) { //iterate table rows
 
                 var $row = $('<div>') //add our classes and append row to table
-                    .addClass('dvdz-' + globalIndex++)
-                    .addClass('dvdz-row')
-                    .addClass('dvdz-row-' + i)
-                    .appendTo($table);
+                .addClass('dvdz-' + globalIndex++)
+                .addClass('dvdz-row')
+                .addClass('dvdz-row-' + i)
+                .appendTo($table);
 
                 if (settings.enableAltRows) { //add alternating row classes
                     $row.addClass((i % 2) === 0 ? 'even' : 'odd');
@@ -111,12 +132,14 @@
                     $row.addClass('last-row');
                 }
 
-                var cellCount = $(this).find('td, ' + settings.customHeaderTarget).length; //add first/last cell tags
-                $('td, ' + settings.customHeaderTarget, this).each(function (index, el) { //iterate table cells
+                var tds = $(this).children('td, ' + settings.customHeaderTarget);
+
+                var cellCount = tds.length; //add first/last cell tags
+                tds.each(function (index, el) { //iterate table cells
                     var $cell = $('<div>')
-                        .addClass('dvdz-' + globalIndex++)
-                        .addClass('dvdz-cell')
-                        .addClass('dvdz-cell-' + index)
+                    .addClass('dvdz-' + globalIndex++)
+                    .addClass('dvdz-cell')
+                    .addClass('dvdz-cell-' + index)
                         //mark the original table header cells
                         .addClass(($(this).is(settings.customHeaderTarget) ? 'data-exth' : ''));
 
@@ -130,7 +153,7 @@
                         $cell.addClass('dvdz-dim-cell');
                         $cell.css({
                             'line-height'       : $(el).outerHeight() + 'px',
-                            'height'            : $(el).outerHeight() + 'px',
+                            'min-height'        : $(el).outerHeight() + 'px',
                             'width'             : $(el).outerWidth() + 'px',
                         });
                     }
@@ -138,10 +161,10 @@
                     //create label with content from table header (exclude header cells)
                     if (settings.addLabelHeaders && !$(this).is(settings.customHeaderTarget)) {
                         var $label = $('<div>')
-                            .addClass('dvdz-' + globalIndex++)
-                            .addClass('dvdz-label')
-                            .addClass('dvdz-label-' + index)
-                            .html(th[index]);
+                        .addClass('dvdz-' + globalIndex++)
+                        .addClass('dvdz-label')
+                        .addClass('dvdz-label-' + index)
+                        .html(th[index]);
 
                         if (settings.hideLabels) {
                             $label.addClass('dvdz-hidden');
@@ -151,9 +174,9 @@
                     }
 
                     var $labelData = $('<div>')
-                        .addClass('dvdz-' + globalIndex++)
-                        .addClass('dvdz-data')
-                        .addClass('dvdz-data-' + index)
+                    .addClass('dvdz-' + globalIndex++)
+                    .addClass('dvdz-data')
+                    .addClass('dvdz-data-' + index)
                         .html($(this).html()); //copy cell content into our data wrapper
 
                     if (settings.preserveDim) { //preserve dimensions of content

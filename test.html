@@ -1,0 +1,151 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/dividize-core.css">
+	<script type="application/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<script type="application/javascript" src="dividize.js"></script>
+	<script type="application/javascript">
+		jQuery(document).ready(function(){
+			jQuery('table').dividize({
+				preserveDim : true
+			});
+		});
+	</script>
+	<style>
+		div {
+			margin: 1px;
+			border: 1px solid grey;
+		}
+	</style>
+</head>
+<body>
+	<p>Tabelle 1:</p>
+	<table style="width: 1000px;">
+		<thead>
+			<tr>
+				<th>Spalte 1</th>
+				<th>Spalte 2</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Eve</td>
+				<td>Jackson</td>
+			</tr>
+			<tr>
+				<td>Eve</td>
+				<td>Jackson</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<p>Tabelle 2:</p>
+	<table style="width: 1000px;">
+		<tr>
+			<th>Firstname</th>
+			<th>Lastname</th> 
+			<th>Points</th>
+		</tr>
+		<tr>
+			<td>Eve</td>
+			<td>Jackson</td> 
+			<td>94</td>
+		</tr>
+	</table>
+
+	<p>Tabelle 3:</p>
+	<table style="width: 1000px;">
+		<tr>
+			<th>Firstname</th>
+			<th>Lastname</th> 
+		</tr>
+		<tr>
+			<td>Eve</td>
+			<td>
+				<table style="width: 700px;">
+					<tr>
+						<th>a</th>
+						<th>b</th> 
+						<th>c</th>
+					</tr>
+					<tr>
+						<td>d</td>
+						<td>e</td> 
+						<td>f</td>
+					</tr>
+				</table>
+			</td> 
+		</tr>
+	</table>
+
+	<p>Tabelle 4:</p>
+	<table style="width: 1000px;">
+		<thead>
+			<tr>
+				<th>Spalte 1</th>
+				<th>Spalte 2</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Eve</td>
+				<td>Jackson</td>
+			</tr>
+			<tr>
+				<td>Eve</td>
+				<td>
+					<table style="width: 700px;">
+						<tr>
+							<th>a</th>
+							<th>b</th> 
+							<th>c</th>
+						</tr>
+						<tr>
+							<td>d</td>
+							<td>e</td> 
+							<td>f</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>Tabelle 5:</p>
+	<table style="width: 1000px;">
+		<thead>
+			<tr>
+				<th>Spalte 1</th>
+				<th>Spalte 2</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Eve</td>
+				<td>Jackson</td>
+			</tr>
+			<tr>
+				<td>Eve</td>
+				<td>
+				<table style="width: 700px;">
+						<thead>
+							<tr>
+								<th>a</th>
+								<th>b</th> 
+								<th>c</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>d</td>
+								<td>e</td> 
+								<td>f</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
