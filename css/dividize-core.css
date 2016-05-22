@@ -1,6 +1,7 @@
 .dvdz-dim-cell {
 	display: inline-block;
 	vertical-align: top;
+	max-width: 100%;
 }
 .dvdz-hidden {
 	display: none;
